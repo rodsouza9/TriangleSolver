@@ -6,11 +6,22 @@ import java.util.InputMismatchException;
 /**
  * Created by Rohan D'Souza on 1/7/2016.
  */
-public class Triangle{
+public class Triangle {
     private TriangleComponent side1;
     private TriangleComponent side2 = null;
     private TriangleComponent angle = null;
     private String type;
+
+    private int a;
+    private int c;
+    private double hyp;
+    private double A;
+    private final double B = 90;
+    private double C;
+
+    final static String degreeSi = "\\u00b0";
+    final static String angleSi = "\u2220";
+
 
     /**
      * No matter what type (String or TriangleComponent) is
@@ -25,14 +36,14 @@ public class Triangle{
      * @param type : "SA" or "SS" determines the type of the right angle triangle
      */
     public Triangle (String side1, String toDecide, String type) {
-        this.type = type;
+        this.type = type.toUpperCase();
         this.side1 = toTriangleComponent(side1);
         if (Character.isUpperCase(toDecide.charAt(0))){
             this.angle = toTriangleComponent(toDecide);
         } else {this.side2 = toTriangleComponent(toDecide);}
     }
     public Triangle (TriangleComponent side1, TriangleComponent toDecide,  String type) {
-        this.type = type;
+        this.type = type.toUpperCase();
         this.side1 = side1;
         if (Character.isUpperCase(toDecide.getAlpha().charAt(0))) {this.angle = toDecide;}
         else {this.side2 = toDecide;}
@@ -42,20 +53,60 @@ public class Triangle{
         return new TriangleComponent(thing.substring(0,1), Integer.parseInt(thing.substring(2)));
     }
 
-    public TriangleComponent getSide1 () {return side1;}
-    public TriangleComponent getSide2 () {return side2;}
-    public TriangleComponent getAngle () {return angle;}
-    public String getType () {return type;}
+    public TriangleComponent getSide1() {return side1;}
+    public TriangleComponent getSide2() {return side2;}
+    public TriangleComponent getAngle() {return angle;}
+    public String getType() {return type;}
 
-    
+    public boolean isSS() {return type.equals("SS");}
+    public boolean isSA() {return type.equals("SA");}
+    public boolean isBothLegs() {
+        return ((side1.getAlpha().equals("a") || side1.getAlpha().equals("c"))
+                &&
+                (side2.getAlpha().equals("a") || side2.getAlpha().equals("c")));
+    }
 
+    /**
+     * @return a String with all sided and angles listed with values;
+     * Triangle Possibilities
+     *  SS
+     *      *Both sides are legs
+     *      *one leg, one hyp
+     *  SA
+     *      *angle, adjacent side
+     *      *angle, opposite side
+     *      *angle, hypotenuse
+     */
     public String solve () {
-        if ()
+        if (isSS() && isBothLegs()) {
+            solveSSbothLegs();
+            return toStringStats();
+        }
+        else if (isSS()) {
+
+        }
         return null;
     }
-    /*public String decodeAlpha (String toDecode) {
 
-    }*/
+    public void solveSSbothLegs() {
+        if (side1.getAlpha().equals("a")) {
+            a = side1.getValue();
+            c = side2.getValue();
+        }
+        else {
+            a = side2.getValue();
+            c = side1.getValue();
+        }
+        hyp = (double) Math.sqrt(a*a + c*c);
+        A = Math.asin(a/hyp);
+        C = 90-A;
+    }
+    public void
+    public String toStringStats () {
+        return  "Sides: a= " +a+ ", b= " +hyp+ ", c= " +c
+                +"\n"+
+                "Angles A= " +A+degreeSi+ ", B= " +B+degreeSi+ ", c= " +C+degreeSi;
+    }
 
     @Override
     public String toString() {
