@@ -5,25 +5,96 @@ import java.util.*;
 /**
  * Created by Rohan D'Souza on 1/24/2016.
  */
-public class TriangleComponent{
+
+/**
+ * <p>"Component" is defined as a representation of one angle or side of any polygon. Every component is made by two things.
+ * <ol style="list-style-type:none">
+ *     <li><code>alpha</code>: the letter representation of an angle or side. (helps identify position)</li>
+ *     <li><code>value</code>: the numerical value of the side or angle.</li>
+ * </ol>
+ * All sides are represented by a lower case letter.
+ * All angles are represented</p>
+ *
+ * <p>A <tt>TriangleComponent</tt> can be used to represent any component of any polygon.</p>
+ *
+ * @author  Rohan D'Souza
+ * @see     Triangle
+ */
+public class TriangleComponent implements Component{
+
+    /**
+     * String <tt>alpha</tt> should have a length of 1 at all times. It represent the location of the component.
+     */
     private String alpha;
     private int value;
 
+    /**
+     * Default constructor: constructs a triangle component with no location and a value of 0;
+     */
     public TriangleComponent() {
         alpha = null;
         value = 0;
     }
-    public TriangleComponent(String alpha) {
-        this.alpha = alpha.toLowerCase();
+
+    /**
+     * @param alpha the alphabetical location of the component.
+     * @param type Specifies weather the component is an angle or a side.
+     * @throws InputMismatchException if the length of <tt>alpha</tt> is not 1 or if the <tt>type</tt> does not specify a or s.
+     */
+    public TriangleComponent (String alpha, String type) throws InputMismatchException{
+        type=type.toLowerCase();
+        if (alpha.length()!=1)
+            throw new InputMismatchException();
+        else if (type.equals("a")) //is an angle
+            this.alpha = alpha.toUpperCase();
+        else if (type.equals("s")) // is a side
+            this.alpha = alpha.toLowerCase();
+        else throw new InputMismatchException();
         value = 0;
     }
-    public TriangleComponent (String alpha, int value) {
-        this.alpha = alpha.toLowerCase();
+
+    public TriangleComponent (String alpha, int value, String type) throws InputMismatchException{
+        type=type.toLowerCase();
+        if (type.equals("a")) //is an angle
+            this.alpha = alpha.toUpperCase();
+        else if (type.equals("s")) // is a side
+            this.alpha = alpha.toLowerCase();
+        else throw new InputMismatchException();
         this.value = value;
     }
-    public void setValue (int value){this.value = value;}
+
+    public TriangleComponent (String alpha) {
+        this.alpha = alpha;
+        value = 0;
+    }
+
+    public TriangleComponent (String alpha, int value) {
+        this.alpha = alpha;
+        this.value = value;
+    }
+
+    public TriangleComponent (TriangleComponent component) {
+        alpha = component.getAlpha();
+        value = component.getValue();
+    }
+
 
     public String getAlpha () {return alpha;}
     public int getValue () {return value;}
+    public void setValue (int value){this.value = value;}
+    public boolean isAngle() {
+        return Character.isUpperCase(this.getAlpha().charAt(0));
+    }
+    public boolean isSide() {
+        return Character.isLowerCase(this.getAlpha().charAt(0));
+    }
+
+
+    /*public static boolean isAngle(TriangleComponent component) {
+        return Character.isUpperCase(component.getAlpha().charAt(0));
+    }
+    public static boolean isSide(TriangleComponent component) {
+        return Character.isLowerCase((component.getAlpha().charAt(0)));
+    }*/
 
 }

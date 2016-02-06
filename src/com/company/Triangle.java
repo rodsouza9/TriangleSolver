@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.plaf.basic.BasicTreeUI;
+import java.awt.image.BufferedImage;
 import java.util.InputMismatchException;
 
 /**
@@ -12,6 +13,18 @@ public class Triangle {
     private TriangleComponent angle = null;
     private String type;
 
+    /** This is the triangle configuration
+     *         C
+     *        /|
+     *       / |
+     *    b /  | a
+     *     /   |
+     *  A /____|B
+     *      c
+     * a,c,hyp are the three sides,
+     * A,B,C are the three angles.
+     *
+     */
     private int a;
     private int c;
     private double hyp;
@@ -21,7 +34,6 @@ public class Triangle {
 
     final static String degreeSi = "\\u00b0";
     final static String angleSi = "\u2220";
-
 
     /**
      * No matter what type (String or TriangleComponent) is
@@ -48,7 +60,7 @@ public class Triangle {
         if (Character.isUpperCase(toDecide.getAlpha().charAt(0))) {this.angle = toDecide;}
         else {this.side2 = toDecide;}
     }
-
+    // MAKE constuctor with Triangle class
     public static TriangleComponent toTriangleComponent (String thing) { //thing "A 65"
         return new TriangleComponent(thing.substring(0,1), Integer.parseInt(thing.substring(2)));
     }
@@ -70,12 +82,13 @@ public class Triangle {
      * @return a String with all sided and angles listed with values;
      * Triangle Possibilities
      *  SS
-     *      *Both sides are legs
-     *      *one leg, one hyp
+     *      *Both sides are legs    >> solveSSbothLegs()
+     *      *one leg, one hyp       >> solveSSlegHyp()
      *  SA
      *      *angle, adjacent side
      *      *angle, opposite side
      *      *angle, hypotenuse
+     *
      */
     public String solve () {
         if (isSS() && isBothLegs()) {
@@ -83,7 +96,8 @@ public class Triangle {
             return toStringStats();
         }
         else if (isSS()) {
-
+            //solveSSlegHyp();
+            return toStringStats();
         }
         return null;
     }
@@ -101,11 +115,14 @@ public class Triangle {
         A = Math.asin(a/hyp);
         C = 90-A;
     }
-    public void
+    //public void solveSSlegHyp() {
+    //    if
+    //}
+
     public String toStringStats () {
         return  "Sides: a= " +a+ ", b= " +hyp+ ", c= " +c
                 +"\n"+
-                "Angles A= " +A+degreeSi+ ", B= " +B+degreeSi+ ", c= " +C+degreeSi;
+                "Angles "+angleSi+"A= " +A+degreeSi+ ", "+angleSi+"B= " +B+degreeSi+ ", "+angleSi+"C= " +C+degreeSi;
     }
 
     @Override
