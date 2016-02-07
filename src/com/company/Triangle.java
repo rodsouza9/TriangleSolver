@@ -60,7 +60,6 @@ public class Triangle {
         if (Character.isUpperCase(toDecide.getAlpha().charAt(0))) {this.angle = toDecide;}
         else {this.side2 = toDecide;}
     }
-    // MAKE constuctor with Triangle class
     public static TriangleComponent toTriangleComponent (String thing) { //thing "A 65"
         return new TriangleComponent(thing.substring(0,1), Integer.parseInt(thing.substring(2)));
     }
