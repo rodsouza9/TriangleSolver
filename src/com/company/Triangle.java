@@ -1,8 +1,8 @@
 package com.company;
 
-import javax.swing.plaf.basic.BasicTreeUI;
-import java.awt.image.BufferedImage;
-import java.util.InputMismatchException;
+import com.sun.javafx.geom.transform.Identity;
+
+import java.util.AbstractList;
 
 /**
  * Created by Rohan D'Souza on 1/7/2016.
@@ -54,7 +54,7 @@ public class Triangle {
             this.angle = toTriangleComponent(toDecide);
         } else {this.side2 = toTriangleComponent(toDecide);}
     }
-    public Triangle (TriangleComponent side1, TriangleComponent toDecide,  String type) {
+    public Triangle (TriangleComponent side1, TriangleComponent toDecide, String type) {
         this.type = type.toUpperCase();
         this.side1 = side1;
         if (Character.isUpperCase(toDecide.getAlpha().charAt(0))) {this.angle = toDecide;}
