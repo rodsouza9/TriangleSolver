@@ -79,6 +79,11 @@ public class ShapeComponent implements Component{
     }
 
 
+    public boolean isValid() {
+        return Character.isAlphabetic(alpha.charAt(0)) && value > 0;
+    }
+
+
     public String getAlpha () {return alpha;}
     public int getValue () {return value;}
     public void setValue (int value){this.value = value;}

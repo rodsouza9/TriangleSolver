@@ -115,9 +115,6 @@ public class Triangle {
         A = Math.asin(a/hyp);
         C = 90-A;
     }
-    //public void solveSSlegHyp() {
-    //    if
-    //}
 
     public String toStringStats () {
         return  "Sides: a= " +a+ ", b= " +hyp+ ", c= " +c

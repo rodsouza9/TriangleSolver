@@ -6,6 +6,7 @@ package com.company;
 public interface Component {
     boolean isAngle();
     boolean isSide();
+    boolean isValid();
     String  getAlpha();
     int     getValue();
     void    setValue(int value);
