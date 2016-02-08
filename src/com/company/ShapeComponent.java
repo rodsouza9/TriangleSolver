@@ -38,7 +38,7 @@ public class ShapeComponent implements Component{
 
     /**
      * @param alpha the alphabetical location of the component.
-     * @param type Specifies weather the component is an angle or a side.
+     * @param type specifies weather the component is an angle or a side. Can be only "a" or "s". a - angle, s - side.
      * @throws InputMismatchException if the length of <tt>alpha</tt> is not 1 or if the <tt>type</tt> does not specify a or s.
      */
     public ShapeComponent(String alpha, String type) throws InputMismatchException{
@@ -86,6 +86,9 @@ public class ShapeComponent implements Component{
 
     public String getAlpha () {return alpha;}
     public int getValue () {return value;}
+    //VVVV That method needs to be changed
+    //Issue: cannot reach subclass either move it down to subclass or figure out how to access lower class
+    //Update: Or wait it might be fine
     public void setValue (int value){this.value = value;}
     public boolean isAngle() {
         return Character.isUpperCase(this.getAlpha().charAt(0));
@@ -94,6 +97,10 @@ public class ShapeComponent implements Component{
         return Character.isLowerCase(this.getAlpha().charAt(0));
     }
 
+    @Override
+    public String toString(){
+        return alpha + "= " + value;
+    }
 
     /*public static boolean isAngle(ShapeComponent component) {
         return Character.isUpperCase(component.getAlpha().charAt(0));
