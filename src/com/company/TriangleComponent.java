@@ -9,19 +9,34 @@ import java.util.InputMismatchException;
  */
 public class TriangleComponent extends ShapeComponent {
     public TriangleComponent()                                                                      {super();}
-    public TriangleComponent(String alpha)                                                          {super(alpha);}
-    public TriangleComponent(String alpha, int value)                                               {super(alpha, value);}
     public TriangleComponent(TriangleComponent component)                                           {super(component);}
-    public TriangleComponent(String alpha, String type)             throws InputMismatchException   {super(alpha,type);}
-    public TriangleComponent(String alpha, int value, String type)  throws InputMismatchException   {super(alpha, value, type);}
+    public TriangleComponent(String alpha, String type)             throws ComponentAlphaMismatchException   {super(alpha,type);}
+    public TriangleComponent(String alpha, int value, String type)  throws ComponentAlphaMismatchException   {super(alpha, value, type);}
 
+
+
+    //you have to add ComponentAlphaMismatchException an the two constructors bellow if the alpha doesnt match side names.
+    public TriangleComponent(String alpha) throws ComponentAlphaMismatchException{
+        super((alpha.equals("test")) ? alpha : throw new ComponentAlphaMismatchException());
+    }
+    public TriangleComponent(String alpha, int value){
+        super(alpha, value);
+    }
 
     public boolean isHyp() {
         return super.getAlpha().equals("b");
     }
+    public boolean isAdj(TriangleComponent angle) throws ComponentAlphaMismatchException {
+        if (this.isSide() && angle.isAngle()) {
 
-    public void thing() {
-        this.getAlpha()
+        }
+        else if (!this.isSide()) {
+            throw new ComponentAlphaMismatchException("this is not a side.");
+        }
+        else if (!angle.isAngle()) {
+            throw new ComponentAlphaMismatchException("alpha is not an angle");
+        }
+        //else if
     }
 
     @Override

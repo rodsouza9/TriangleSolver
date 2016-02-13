@@ -7,21 +7,20 @@ import java.util.*;
  */
 
 /**
- * <p>"Component" is defined as a representation of one angle or side of any polygon. Every component is made by two things.
- * <ol style="list-style-type:none">
- *     <li><code>alpha</code>: the letter representation of an angle or side. (helps identify position)</li>
- *     <li><code>value</code>: the numerical value of the side or angle.</li>
- * </ol>
- * All sides are represented by a lower case letter.
- * All angles are represented</p>
- *
- * <p>A <tt>ShapeComponent</tt> can be used to represent any component of any polygon.</p>
+ * <p>"Component" is defined as a representation of one angle or
+ * side of any polygon. Every component is made by two things.
+ * <ol style="list-style-type:none"><li><code>alpha</code>: the
+ * letter representation of an angle or side. (helps identify
+ * position)</li><li><code>value</code>: the numerical value of
+ * the side or angle.</li></ol>All sides are represented by a
+ * lower case letter.All angles are represented</p> <p>A
+ * <tt>ShapeComponent</tt> can be used to represent any component
+ * of any polygon.</p>
  *
  * @author  Rohan D'Souza
  * @see     Triangle
  */
 public class ShapeComponent implements Component{
-
     /**
      * String <tt>alpha</tt> should have a length of 1 at all times. It represent the location of the component.
      */
@@ -39,27 +38,27 @@ public class ShapeComponent implements Component{
     /**
      * @param alpha the alphabetical location of the component.
      * @param type specifies weather the component is an angle or a side. Can be only "a" or "s". a - angle, s - side.
-     * @throws InputMismatchException if the length of <tt>alpha</tt> is not 1 or if the <tt>type</tt> does not specify a or s.
+     * @throws ComponentAlphaMismatchException if the length of <tt>alpha</tt> is not 1 or if the <tt>type</tt> does not specify a or s.
      */
-    public ShapeComponent(String alpha, String type) throws InputMismatchException{
+    public ShapeComponent(String alpha, String type) throws ComponentAlphaMismatchException{
         type=type.toLowerCase();
         if (alpha.length()!=1)
-            throw new InputMismatchException();
+            throw new ComponentAlphaMismatchException();
         else if (type.equals("a")) //is an angle
             this.alpha = alpha.toUpperCase();
         else if (type.equals("s")) // is a side
             this.alpha = alpha.toLowerCase();
-        else throw new InputMismatchException();
+        else throw new ComponentAlphaMismatchException();
         value = 0;
     }
 
-    public ShapeComponent(String alpha, int value, String type) throws InputMismatchException{
+    public ShapeComponent(String alpha, int value, String type) throws ComponentAlphaMismatchException{
         type=type.toLowerCase();
         if (type.equals("a")) //is an angle
             this.alpha = alpha.toUpperCase();
         else if (type.equals("s")) // is a side
             this.alpha = alpha.toLowerCase();
-        else throw new InputMismatchException();
+        else throw new ComponentAlphaMismatchException();
         this.value = value;
     }
 

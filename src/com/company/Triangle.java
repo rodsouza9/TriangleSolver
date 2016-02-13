@@ -25,8 +25,8 @@ public class Triangle {
      * A,B,C are the three angles.
      *
      */
-    private int a;
-    private int c;
+    private double a;
+    private double c;
     private double hyp;
     private double A;
     private final double B = 90;
@@ -95,8 +95,14 @@ public class Triangle {
             return toStringStats();
         }
         else if (isSS()) {
-            //solveSSlegHyp();
+            solveSSlegHyp();
             return toStringStats();
+        }
+        else if (isSA() && side1.isHyp()) {
+
+        }
+        else if (isSA() && side1) {
+
         }
         return null;
     }
@@ -110,11 +116,40 @@ public class Triangle {
             a = side2.getValue();
             c = side1.getValue();
         }
-        hyp = (double) Math.sqrt(a*a + c*c);
+        //CHECK HOW THE MATH WORK OUT IN JAVA BELLOW
+        hyp = Math.sqrt(a*a + c*c);
+        setAngles();
+    }
+    public void solveSSlegHyp() {
+        if (side1.getAlpha().equals("a")) {
+            a = side1.getValue();
+            hyp = side2.getValue();
+            c = Math.sqrt((hyp*hyp) - (a*a));
+        }
+        else if (side1.getAlpha().equals("c")) {
+            c = side1.getValue();
+            hyp = side2.getValue();
+            a = Math.sqrt((hyp*hyp) - (c*c));
+        }
+        else if (side2.getAlpha().equals("a")) {
+            a = side2.getValue();
+            hyp = side1.getValue();
+            c = Math.sqrt((hyp*hyp) - (c*c));
+        }
+        else if (side2.getAlpha().equals("c")) {
+            c = side2.getValue();
+            hyp = side1.getValue();
+            a = ((hyp*hyp) - (c*c));
+        }
+        setAngles();
+    }
+    public void setAngles() {
         A = Math.asin(a/hyp);
         C = 90-A;
     }
+    public void solveSAlegAngle() {
 
+    }
     public String toStringStats () {
         return  "Sides: a= " +a+ ", b= " +hyp+ ", c= " +c
                 +"\n"+
