@@ -61,7 +61,12 @@ public class Triangle {
         else {this.side2 = toDecide;}
     }
     public static TriangleComponent toTriangleComponent (String thing) { //thing "A 65"
-        return new TriangleComponent(thing.substring(0,1), Integer.parseInt(thing.substring(2)));
+        try {
+            return new TriangleComponent(thing.substring(0,1), Integer.parseInt(thing.substring(2)));
+        } catch (ComponentMismatchException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public TriangleComponent getSide1() {return side1;}
@@ -99,10 +104,7 @@ public class Triangle {
             return toStringStats();
         }
         else if (isSA() && side1.isHyp()) {
-
-        }
-        else if (isSA() && side1) {
-
+            solveSAlegAngle();
         }
         return null;
     }

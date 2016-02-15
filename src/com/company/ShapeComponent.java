@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.*;
-
 /**
  * Created by Rohan D'Souza on 1/24/2016.
  */
@@ -24,8 +22,8 @@ public class ShapeComponent implements Component{
     /**
      * String <tt>alpha</tt> should have a length of 1 at all times. It represent the location of the component.
      */
-    private String alpha;
-    private int value;
+    protected String alpha;
+    protected int value;
 
     /**
      * Default constructor: constructs a triangle component with no location and a value of 0;
@@ -38,27 +36,27 @@ public class ShapeComponent implements Component{
     /**
      * @param alpha the alphabetical location of the component.
      * @param type specifies weather the component is an angle or a side. Can be only "a" or "s". a - angle, s - side.
-     * @throws ComponentAlphaMismatchException if the length of <tt>alpha</tt> is not 1 or if the <tt>type</tt> does not specify a or s.
+     * @throws ComponentMismatchException if the length of <tt>alpha</tt> is not 1 or if the <tt>type</tt> does not specify a or s.
      */
-    public ShapeComponent(String alpha, String type) throws ComponentAlphaMismatchException{
+    public ShapeComponent(String alpha, String type) throws ComponentMismatchException {
         type=type.toLowerCase();
         if (alpha.length()!=1)
-            throw new ComponentAlphaMismatchException();
+            throw new ComponentMismatchException();
         else if (type.equals("a")) //is an angle
             this.alpha = alpha.toUpperCase();
         else if (type.equals("s")) // is a side
             this.alpha = alpha.toLowerCase();
-        else throw new ComponentAlphaMismatchException();
+        else throw new ComponentMismatchException();
         value = 0;
     }
 
-    public ShapeComponent(String alpha, int value, String type) throws ComponentAlphaMismatchException{
+    public ShapeComponent(String alpha, int value, String type) throws ComponentMismatchException {
         type=type.toLowerCase();
         if (type.equals("a")) //is an angle
             this.alpha = alpha.toUpperCase();
         else if (type.equals("s")) // is a side
             this.alpha = alpha.toLowerCase();
-        else throw new ComponentAlphaMismatchException();
+        else throw new ComponentMismatchException();
         this.value = value;
     }
 
