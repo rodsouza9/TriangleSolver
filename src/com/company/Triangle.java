@@ -35,6 +35,16 @@ public class Triangle {
     final static String degreeSi = "\\u00b0";
     final static String angleSi = "\u2220";
 
+    public Triangle () {
+        side1 = null;
+        side2 = null;
+        angle = null;
+        a = 0;
+        c = 0;
+        hyp = 0;
+        A = 0;
+        c = 0;
+    }
     /**
      * No matter what type (String or TriangleComponent) is
      * the parameter it is converted to TriangleComponent and
